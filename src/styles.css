@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* see link for below import reasoning: https://stackoverflow.com/questions/45166844/how-to-import-angular-material-in-project */
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
