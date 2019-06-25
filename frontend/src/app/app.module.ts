@@ -17,6 +17,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { AboutComponent } from './components/about/about.component';
     MatInputModule,
     MatListModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 export class Contact {
-  _id: string; // This may change to type number depending on how mongodb handles indexing
-  firstName: string;
-  lastName: string;
+  id: string; // This may change to type number depending on how mongodb handles indexing
+  name: string;
   email: string;
   team: string;
   position: string;

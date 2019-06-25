@@ -6,15 +6,22 @@
   <mat-expansion-panel-header>
 
     <mat-panel-title>
-      {{ contact.firstName }}
+      {{ contact.firstName }} {{ contact.lastName}}
     </mat-panel-title>
 
     <mat-panel-description>
-      Currently I am {{panelOpenState ? 'open' : 'closed'}}
+
     </mat-panel-description>
 
   </mat-expansion-panel-header>
 
-  <p>I'm visible because I am open</p>
+  <label> EMAIL </label>
+  <mat-label> {{contact.email}} </mat-label>
+  <br>
+  <mat-label> {{ contact.team }} </mat-label>
+  <br>
+  <mat-label> {{ contact.position }} </mat-label>
+  <br>
+  <mat-label> {{ contact.lastInteraction }} </mat-label>
 
 </mat-expansion-panel>
