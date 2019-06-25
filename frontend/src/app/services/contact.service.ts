@@ -14,42 +14,15 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ContactService {
-  contactsURL: string = 'http://localhost:3001/api/contacts';
+  contactsURL: string = 'http://localhost:3000/api/contacts';
   constructor(private http: HttpClient) { }
 
-  // getContacts(): Observable<Contact[]> {
-  //   return this.http.get<Contact[]>(this.contactsURL);
-  // }
-
-  getContacts(): Contact[] {
-    return [
-      {
-        id: '123',
-        firstName: 'jon',
-        lastName: 'doe',
-        email: 'jon.doe@outlook.com',
-        team: 'D1',
-        position: 'PO',
-        intimacyScore: 42,
-        dateCreated: new Date(),
-        lastInteraction: new Date()
-      },
-      {
-        id: '234',
-        firstName: 'jane',
-        lastName: 'smith',
-        email: 'jane.smith@outlook.com',
-        team: 'D1',
-        position: 'PM',
-        intimacyScore: 32,
-        dateCreated: new Date(),
-        lastInteraction: new Date()
-      }
-    ];
+  getContacts() {
+    return this.http.get(this.contactsURL);
   }
 
   deleteContact(contact: Contact): Observable<Contact> {
-    const url = `${this.contactsURL}/${contact.id}`;
+    const url = `${this.contactsURL}/${contact._id}`;
     return this.http.delete<Contact>(url, httpOptions);
   }
 

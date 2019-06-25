@@ -14,15 +14,14 @@ export class ContactListComponent implements OnInit {
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    // this.contactService.getContacts().subscribe(contacts => {
-    //   this.contacts = contacts;
-    // });
-    this.contacts = this.contactService.getContacts();
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contacts = contacts['contacts'];
+    });
   }
 
   deleteContact(contact: Contact) {
     // remove from ui
-    this.contacts = this.contacts.filter(c => c.id !== contact.id);
+    this.contacts = this.contacts.filter(c => c._id !== contact._id);
     // remove from server
     this.contactService.deleteContact(contact).subscribe();
   }

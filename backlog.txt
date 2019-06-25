@@ -1,0 +1,6 @@
+Tasks:
+
+Stretch:
+    Add pictures to contacts
+    Display pictures of contacts in contact list components
+    Display list of small pictures in interaction component
