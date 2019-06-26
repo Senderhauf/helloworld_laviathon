@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//import { MaterialModule } from './extra_modules/material.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './extra_modules/app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
@@ -19,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { MatTableModule } from '@angular/material';
     MatExpansionModule,
     HttpClientModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

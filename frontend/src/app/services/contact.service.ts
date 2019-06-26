@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ContactService {
-  contactsURL: string = 'http://localhost:3000/api/contacts';
+  contactsURL = 'http://localhost:3000/api/contacts';
   constructor(private http: HttpClient) { }
 
   getContacts() {

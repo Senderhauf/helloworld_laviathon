@@ -10,3 +10,9 @@ table {
 matInput {
 	color: black;
 }
+
+#fab{
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}
