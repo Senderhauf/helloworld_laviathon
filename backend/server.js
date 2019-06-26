@@ -39,5 +39,31 @@ app.get('/api/contacts', (req, res) => {
   })
 })
 
+app.post('/api/contacts', (req, res) => {
+  const newContact = req.body;
+  db.collection('contact').updateOne({email:newContact.email}, {$set: newContact}, {upsert:true}).then(result =>
+    {
+        console.log(`modified count: ${result.modifiedCount}`)
+        console.log(`matched count: ${result.matchedCount}`)
+
+        if (!(result.matchedCount === 0 && result.modifiedCount === 0)){
+            throw Error('Contact Exists Already')
+        }
+        console.log(`result.upsertedId: ${result.upsertedId._id}`)
+        var o_id = new mongo.ObjectID(result.upsertedId._id)
+        console.log(`objectid: ${o_id}`)
+        return db.collection('contacts').find({_id: o_id }).limit(1).next()
+    }
+).then(newContact => {
+    console.log(`server newContact: ${JSON.stringify(newContact)}`)
+res.json(newContact);
+}).catch(error => {
+console.log(error);
+res.status(500).json({message: `Internal Server Error: ${error}`});
+});
+
+
+})
+
 // Close the mongodb instance.
 pipe.kill();
