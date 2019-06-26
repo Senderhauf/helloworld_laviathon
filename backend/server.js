@@ -34,3 +34,15 @@ app.get('/api/contacts', (req, res) => {
     res.status(500).json({message: `Internal Server Error: ${error}`});
   })
 })
+
+// app.delete @ route: /api/contact/:contactID
+
+// app.delete @ route: /api/interaction/:interactionID
+
+// app.post @ route: /api/contact
+
+// app.post @ route: /api/interaction
+
+
+
+
