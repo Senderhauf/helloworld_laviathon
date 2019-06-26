@@ -1,0 +1,21 @@
+{
+  "name": "helloworld_laviathon",
+  "version": "1.0.0",
+  "description": "fis orientation project ",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Senderhauf/helloworld_laviathon.git"
+  },
+  "author": "Hart Sinterhauf, Matthew Schubring, James Hortman, Sam Vanevenhoven",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Senderhauf/helloworld_laviathon/issues"
+  },
+  "homepage": "https://github.com/Senderhauf/helloworld_laviathon#readme"
+}

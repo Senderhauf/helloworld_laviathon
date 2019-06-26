@@ -7,8 +7,8 @@ const app = express();
 const port = 3000;
 
 // Start MongoDB instance.
-const spawn = require('child_process').spawn;
-const pipe = spawn('mongod')
+// const spawn = require('child_process').spawn;
+// const pipe = spawn('mongod')
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -75,4 +75,4 @@ res.status(500).json({message: `Internal Server Error: ${error}`});
 })
 
 // Close the mongodb instance.
-pipe.kill();
+// pipe.kill();
