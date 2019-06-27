@@ -4,7 +4,7 @@ export class Contact {
   email: string;
   team: string;
   position: string;
-  intimacyScore: number;
+  rapport: number;
   dateCreated: Date;
   lastInteraction: Date;
 }

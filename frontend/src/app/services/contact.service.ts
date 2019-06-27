@@ -20,7 +20,7 @@ export class ContactService {
   getContacts() {
     return this.http.get(this.contactsURL);
   }
-
+  
   deleteContact(contact: Contact): Observable<Contact> {
     const url = `${this.contactsURL}/${contact.id}`;
     return this.http.delete<Contact>(url, httpOptions);
@@ -30,7 +30,8 @@ export class ContactService {
     return this.http.post<Contact>(this.contactsURL, contact, httpOptions);
   }
 
-
   //TODO: create method 'editContact()'
+
+  //TODO: create method 'getContact(contact: Contact)'
 
 }

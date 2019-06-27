@@ -19,6 +19,9 @@ import { AboutComponent } from './components/about/about.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -45,8 +48,12 @@ import { MatIconModule, MatIcon } from '@angular/material/icon';
     HttpClientModule,
     MatSortModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule, 
+    MatPaginatorModule, 
+    MatDialogModule
   ],
+  entryComponents: [ContactCreateComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

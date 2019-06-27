@@ -17,4 +17,6 @@ matInput {
     bottom: 40px;
 }
 
-
+.mat-row:hover {
+	background-color: silver;
+}
