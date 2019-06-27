@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
+const mongo = require('mongodb')
+const MongoClient = mongo.MongoClient;
 
 let db;
 const app = express();
@@ -9,8 +10,8 @@ const port = 3000;
 
 
 // Start MongoDB instance.
-// const spawn = require('child_process').spawn;
-// const pipe = spawn('mongod')
+//const spawn = require('child_process').spawn;
+//const pipe = spawn('mongod')
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -57,19 +58,16 @@ app.get('/api/contacts/:email', (req, res) => {
 app.post('/api/contact', (req, res) => {
   const newContact = req.body;
   db.collection('contacts').updateOne({ email: newContact.email }, { $set: newContact }, { upsert: true }).then(result => {
-    console.log(`modified count: ${result.modifiedCount}`)
-    console.log(`matched count: ${result.matchedCount}`)
+    console.log(`DEBUG - modified count: ${result.modifiedCount}`)
+    console.log(`DEBUG - matched count: ${result.matchedCount}`)
 
-    if (!(result.matchedCount === 0 && result.modifiedCount === 0)) {
-      throw Error('Contact Exists Already')
-    }
-    console.log(`result.upsertedId: ${result.upsertedId._id}`)
-    var o_id = new mongo.ObjectID(result.upsertedId._id)
-    console.log(`objectid: ${o_id}`)
-    return db.collection('contacts').find({ _id: o_id }).limit(1).next()
+    var contact = db.collection('contacts').find({email: newContact.email}).limit(1).next()
+
+    console.log(`DEBUG - objectid: ${contact._id}`)
+    return contact
   }
   ).then(newContact => {
-    console.log(`server newContact: ${JSON.stringify(newContact)}`)
+    console.log(`DEBUG - server updated / new Contact: ${JSON.stringify(newContact)}`)
     res.json(newContact);
   }).catch(error => {
     console.log(error);
@@ -104,6 +102,7 @@ app.get('/api/interactions/:id', (req, res) => {
 
 app.post('/api/interaction', (req, res) => {
   const newInteraction = req.body;
+  log("DEBUG - ")
   db.collection('interactions').updateOne({ id: newInteraction.id }, { $set: newInteraction }, { upsert: true }).then(result => {
     console.log(`modified count: ${result.modifiedCount}`)
     console.log(`matched count: ${result.matchedCount}`)
@@ -129,4 +128,4 @@ app.post('/api/interaction', (req, res) => {
 
 
 // Close the mongodb instance.
-// pipe.kill();
+//pipe.kill();
