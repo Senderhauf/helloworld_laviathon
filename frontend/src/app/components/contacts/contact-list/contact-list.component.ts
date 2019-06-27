@@ -5,6 +5,10 @@ import { Contact } from '../../../models/Contact';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ContactCreateComponent } from '../contact-create/contact-create.component';
+
+
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -13,9 +17,9 @@ import { MatSort } from '@angular/material/sort';
 export class ContactListComponent implements OnInit {
   contacts: Contact[];
   dataSource: MatTableDataSource<Contact> = new MatTableDataSource(this.contacts);
-  displayedColumns: string[] = ['name', 'position', 'team', 'email', 'last interaction'];
+  displayedColumns: string[] = ['name', 'rapport', 'position', 'team', 'email', 'last interaction'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe(contacts => {
@@ -48,6 +52,23 @@ export class ContactListComponent implements OnInit {
   addContact(contact: Contact) {
     this.contactService.addContact(contact).subscribe(contact => {
       this.contacts.push(contact);
+    });
+  }
+
+  getContact(contact: Contact) {
+    console.log(contact);
+  }
+
+  createNewContactDialog() {
+    console.log('Dialog click event captured');
+    const dialogRef = this.dialog.open(ContactCreateComponent, {
+      width: '250px', 
+      data: {contacts: this.contacts}
+    });
+
+    dialogRef.afterClosed().subscribe(newContacts => {
+      console.log('Dialog closed');
+      this.contacts = newContacts;
     });
   }
 
