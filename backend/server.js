@@ -76,7 +76,24 @@ app.post('/api/contact', (req, res) => {
 })
 
 // app.delete @ route: /api/contact/:contactID
+app.delete('/api/contacts/:email', (req, res) => {
+  db.collection('contacts').deleteOne({email: req.params.email}).then(result => {
+    console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
+    if (result.deletedCount > 0){
+      console.log(`DEBUG - server deleted: ${JSON.stringify(result.deletedCount)}`)
+      res.status(200).json({message: `Deleted ${result.deletedCount} contacts.`})
+    }
+    else{
+      console.log(`DEBUG - Failed to Delete: Contact not found.`)
+      res.status(200).json({message: `That contact does not exist.`})
+    }
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({ message: `Internal Server Error: ${error}`});
+  })
+})
 
 //Interaction API
 
