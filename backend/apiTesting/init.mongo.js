@@ -11,17 +11,22 @@ MongoClient.connect(url, function(err, client) {
   assert.equal(null, err);
   const db = client.db("FIS_Connected");
   db.collection("contacts").insertMany([
-    {"name" : "Jim Bob", "email" : "jim.bob@fisglobal.com", "team" : "apex", "position" : "scrum master", "rapport" : 5 },
-    {"name" : "Tom Petty", "email" : "tom.petty@fisglobal.com", "team" : "digital one", "position" : "developer", "rapport" : 7 },
-    {"name" : "Eddy Murphy", "email" : "eddy.murphy@fisglobal.com", "team" : "apex", "position" : "product owner", "rapport" : 6 },
-    {"name" : "Morgan Freeman", "email" : "morgan.freeman@fisglobal.com", "team" : "unified payments", "position" : "developer", "rapport" : 7 },
-    {"name" : "Dan Smith", "email" : "dan.smith@fisglobal.com", "team" : "digital one", "position" : "scrum master", "rapport" : 2 },
-    {"name" : "Kaity Smith", "email" : "kaity.smith@fisglobal.com", "team" : "apex", "position" : "developer", "rapport" : 5 },
-    {"name" : "Morgan Hamm", "email" : "morgan.hamm@fisglobal.com", "team" : "digital one", "position" : "product owner", "rapport" : 6 },
-    {"name" : "Paul Hamm", "email" : "paul.hamm@fisglobal.com", "team" : "unified payments", "position" : "developer", "rapport" : 7 }
+    {name : "Jim Bob", email : "jim.bob@fisglobal.com", team : "apex", position : "scrum master", rapport : 5, lastInteraction : "2019-06-17T11:49:41.753Z" },
+    {name : "Tom Petty", email : "tom.petty@fisglobal.com", team : "digital one", position : "developer", rapport : 7, lastInteraction : "2019-06-17T11:49:41.753Z" },
+    {name : "Eddy Murphy", email : "eddy.murphy@fisglobal.com", team : "apex", position : "product owner", rapport : 6, lastInteraction : "2019-06-17T11:49:41.753Z" },
+    {name : "Morgan Freeman", email : "morgan.freeman@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-22T09:49:41.753Z" },
+    {name : "Dan Smith", email : "dan.smith@fisglobal.com", team : "digital one", position : "scrum master", rapport : 2, lastInteraction : "2019-06-26T09:49:41.753Z" },
+    {name : "Kaity Smith", email : "kaity.smith@fisglobal.com", team : "apex", position : "developer", rapport : 5, lastInteraction : "2019-06-25T09:49:41.753Z"  },
+    {name : "Morgan Hamm", email : "morgan.hamm@fisglobal.com", team : "digital one", position : "product owner", rapport : 6, lastInteraction : "2019-06-24T09:49:41.753Z"  },
+    {name : "Paul Hamm", email : "paul.hamm@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  }
   ])
-
   db.collection("contacts").createIndex({email:1});
+
+  db.collection("interactions").insertMany([
+    { eventType: "Lunch", eventQualtity: 5, eventLocation: "Davians", startTime: "2019-06-22T09:49:41.753Z", endTime: "2019-06-22T10:49:41.753Z", members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQualtity: 3, eventLocation: "Davians", startTime: "2019-06-26T09:49:41.753Z", endTime: "2019-06-26T10:49:41.753Z", members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"] }
+ ])
+
   client.close();
 });
 

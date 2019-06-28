@@ -76,7 +76,7 @@ app.post('/api/contact', (req, res) => {
 })
 
 // app.delete @ route: /api/contact/:contactID
-app.delete('/api/contacts/:email', (req, res) => {
+app.delete('/api/contacts/:id', (req, res) => {
   db.collection('contacts').deleteOne({email: req.params.email}).then(result => {
     console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
@@ -142,7 +142,24 @@ app.post('/api/interaction', (req, res) => {
 })
 
 // app.delete @ route: /api/interaction/:interactionID
+app.delete('/api/interactions/:id', (req, res) => {
+  db.collection('interactions').deleteOne({id: req.params.id}).then(result => {
+    console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
+    if (result.deletedCount > 0){
+      console.log(`DEBUG - server deleted: ${JSON.stringify(result.deletedCount)}`)
+      res.status(200).json({message: `Deleted ${result.deletedCount} interactions.`})
+    }
+    else{
+      console.log(`DEBUG - Failed to Delete: Interaction not found.`)
+      res.status(200).json({message: `That interaction does not exist.`})
+    }
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({ message: `Internal Server Error: ${error}`});
+  })
+})
 
 // Close the mongodb instance.
 //pipe.kill();
