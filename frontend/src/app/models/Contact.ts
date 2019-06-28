@@ -7,4 +7,5 @@ export class Contact {
   rapport: number;
   dateCreated: Date;
   lastInteraction: Date;
+  notes: object;
 }

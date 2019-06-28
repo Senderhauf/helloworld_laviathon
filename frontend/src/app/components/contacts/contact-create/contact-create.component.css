@@ -1,0 +1,10 @@
+.mat-button {
+	float: right;
+	border: none;
+	padding-top: 15px;
+}
+
+mat-form-field {
+	width: '70%'
+}
+

@@ -1,27 +1,51 @@
 
-<mat-expansion-panel
-  (opened)="panelOpenState = true"
-  (closed)="panelOpenState = false">
+<div main-container>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Edit Contact</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="example-container">
+        <mat-label for="contact_name">Name</mat-label>
+        <mat-form-field>
+          <input id="contact_name" matInput [placeholder]="contact.name">
+          <mat-hint>Name</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-label>Email</mat-label>
+        <mat-form-field>
+          <input matInput [placeholder]="contact.email">
+          <mat-hint>Email</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-label>Position</mat-label>
+        <mat-form-field>
+          <input matInput [placeholder]="contact.position">
+          <mat-hint>Position</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-label>Team</mat-label>
+        <mat-form-field>
+          <input matInput [placeholder]="contact.team">
+          <mat-hint>Team</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-label>Rapport</mat-label>
+        <mat-form-field>
+          <input matInput [placeholder]="contact.rapport" matTooltip="How well do you know them? On a scale of 1-100 (1 being least familiar)">
+          <mat-hint>Rapport</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-label>Notes</mat-label>
+        <mat-form-field>
+          <textarea matInput [placeholder]="contact.notes"></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>SAVE</button>
+      <button mat-button>CANCEL</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
 
-  <mat-expansion-panel-header>
-
-    <mat-panel-title>
-      {{ contact.firstName }} {{ contact.lastName}}
-    </mat-panel-title>
-
-    <mat-panel-description>
-
-    </mat-panel-description>
-
-  </mat-expansion-panel-header>
-
-  <label> EMAIL </label>
-  <mat-label> {{contact.email}} </mat-label>
-  <br>
-  <mat-label> {{ contact.team }} </mat-label>
-  <br>
-  <mat-label> {{ contact.position }} </mat-label>
-  <br>
-  <mat-label> {{ contact.lastInteraction }} </mat-label>
-
-</mat-expansion-panel>

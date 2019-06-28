@@ -3,13 +3,9 @@ table {
 }
 
 .mat-form-field {
-	font-size: 14px;
 	width: 100%;
 }
 
-matInput {
-	color: black;
-}
 
 #fab{
     position: fixed;
@@ -20,3 +16,5 @@ matInput {
 .mat-row:hover {
 	background-color: silver;
 }
+
+

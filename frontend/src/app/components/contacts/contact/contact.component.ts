@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ContactService } from '../../../services/contact.service';
-
+import { Component, OnInit, Inject} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Contact } from '../../../models/Contact';
 
 @Component({
@@ -9,16 +8,18 @@ import { Contact } from '../../../models/Contact';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  @Input() contact: Contact;
-  @Output() deleteContact: EventEmitter<Contact> = new EventEmitter();
-  panelOpenState: string;
-
-  constructor(private contactService: ContactService) { }
+  contact: Contact;
+  constructor(
+    public dialogRef: MatDialogRef<ContactComponent>,
+    @Inject(MAT_DIALOG_DATA) public contactToEdit
+  ) { }
 
   ngOnInit() {
+    this.contact = this.contactToEdit.contactToEdit;
+    console.log(this.contact);
   }
 
-  onDelete(contact) {
-    this.deleteContact.emit(contact);
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

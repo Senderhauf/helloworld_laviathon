@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ContactCreateComponent } from '../contact-create/contact-create.component';
-
+import { ContactComponent } from '../contact/contact.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -55,21 +55,31 @@ export class ContactListComponent implements OnInit {
     });
   }
 
-  getContact(contact: Contact) {
-    console.log(contact);
+  editContactDialog(contact: Contact) {
+    const dialogRef = this.dialog.open(ContactComponent, {
+      data: {contactToEdit: contact}
+    });
+
+    dialogRef.afterClosed().subscribe(newContact => {
+      this.contacts.map(c => {
+        if (c.email === newContact.email) {
+          c = newContact;
+        }
+        return c;
+      })
+    })
   }
 
   createNewContactDialog() {
-    console.log('Dialog click event captured');
     const dialogRef = this.dialog.open(ContactCreateComponent, {
-      width: '250px', 
+      // width: '80%', 
       data: {contacts: this.contacts}
     });
 
     dialogRef.afterClosed().subscribe(newContacts => {
-      console.log('Dialog closed');
       this.contacts = newContacts;
     });
   }
 
+  
 }
