@@ -137,10 +137,6 @@ app.post('/api/interaction', (req, res) => {
   });
 })
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0e7c86475ff7742624fae3a1437353de30720e3f
 // app.delete @ route: /api/interaction/:interactionID
 app.delete('/api/interactions/:uniqueStamp', (req, res) => {
   db.collection('interactions').deleteOne({uniqueStamp: req.params.uniqueStamp}).then(result => {
