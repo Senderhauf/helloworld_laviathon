@@ -22,7 +22,7 @@ export class ContactService {
   }
   
   deleteContact(contact: Contact): Observable<Contact> {
-    const url = `${this.contactsURL}/${contact.id}`;
+    const url = `${this.contactsURL}/${contact.email}`;
     return this.http.delete<Contact>(url, httpOptions);
   }
 
