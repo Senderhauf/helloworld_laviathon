@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongo = require('mongodb')
 const MongoClient = mongo.MongoClient;
+const ObjectId = mongo.ObjectId;
 
 let db;
 const app = express();
@@ -76,7 +77,7 @@ app.post('/api/contact', (req, res) => {
 })
 
 // app.delete @ route: /api/contact/:contactID
-app.delete('/api/contacts/:id', (req, res) => {
+app.delete('/api/contacts/:email', (req, res) => {
   db.collection('contacts').deleteOne({email: req.params.email}).then(result => {
     console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
@@ -108,8 +109,9 @@ app.get('/api/interactions', (req, res) => {
 })
 
 app.get('/api/interactions/:id', (req, res) => {
-  db.collection('contacts').find({ id: req.params.id }).toArray().then(interactions => {
+  db.collection('interactions').find({ _id: ObjectId(req.params.id)}).toArray().then(interactions => {
     const metadata = { total_count: interactions.length };
+    console.log(metadata);
     res.json({ _metadata: metadata, interactions: interactions });
   }).catch(error => {
     console.log(error);
@@ -120,7 +122,7 @@ app.get('/api/interactions/:id', (req, res) => {
 app.post('/api/interaction', (req, res) => {
   const newInteraction = req.body;
   log("DEBUG - ")
-  db.collection('interactions').updateOne({ id: newInteraction.id }, { $set: newInteraction }, { upsert: true }).then(result => {
+  db.collection('interactions').updateOne({ _id: newInteraction.id }, { $set: newInteraction }, { upsert: true }).then(result => {
     console.log(`modified count: ${result.modifiedCount}`)
     console.log(`matched count: ${result.matchedCount}`)
 
@@ -143,7 +145,7 @@ app.post('/api/interaction', (req, res) => {
 
 // app.delete @ route: /api/interaction/:interactionID
 app.delete('/api/interactions/:id', (req, res) => {
-  db.collection('interactions').deleteOne({id: req.params.id}).then(result => {
+  db.collection('interactions').deleteOne({_id: ObjectId(req.params.id)}).then(result => {
     console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
     if (result.deletedCount > 0){
