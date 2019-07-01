@@ -18,7 +18,16 @@ MongoClient.connect(url, function(err, client) {
     {name : "Dan Smith", email : "dan.smith@fisglobal.com", team : "digital one", position : "scrum master", rapport : 2, lastInteraction : "2019-06-26T09:49:41.753Z" },
     {name : "Kaity Smith", email : "kaity.smith@fisglobal.com", team : "apex", position : "developer", rapport : 5, lastInteraction : "2019-06-25T09:49:41.753Z"  },
     {name : "Morgan Hamm", email : "morgan.hamm@fisglobal.com", team : "digital one", position : "product owner", rapport : 6, lastInteraction : "2019-06-24T09:49:41.753Z"  },
-    {name : "Paul Hamm", email : "paul.hamm@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  }
+    {name : "Paul Hamm", email : "paul.hamm@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test1", email : "test1@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test2", email : "test2@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test3", email : "test3@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test4", email : "test4@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test5", email : "test5@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test6", email : "test6@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test7", email : "test7@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test8", email : "test8@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  },
+    {name : "test9", email : "test9@fisglobal.com", team : "unified payments", position : "developer", rapport : 7, lastInteraction : "2019-06-23T09:49:22.753Z"  }
   ])
   db.collection("contacts").createIndex({email:1});
 

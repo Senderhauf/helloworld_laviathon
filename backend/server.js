@@ -59,6 +59,11 @@ app.get('/api/contacts/:email', (req, res) => {
 
 app.post('/api/contacts', (req, res) => {
   const newContact = req.body;
+  Object.keys(newContact).map(x => {
+    if (typeof(x) === 'string') {
+      newContact[x] = newContact[x].toLowerCase()
+    }
+  })
   db.collection('contacts').updateOne({ email: newContact.email }, { $set: newContact }, { upsert: true }).then(result => {
     console.log(`DEBUG - modified count: ${result.modifiedCount}`)
     console.log(`DEBUG - matched count: ${result.matchedCount}`)
