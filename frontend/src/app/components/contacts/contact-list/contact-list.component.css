@@ -6,11 +6,10 @@ table {
 	width: 100%;
 }
 
-
 #fab{
     position: fixed;
-    right: 40px;
-    bottom: 40px;
+    right: 15px;
+    bottom: 60px;
 }
 
 .mat-row:hover {

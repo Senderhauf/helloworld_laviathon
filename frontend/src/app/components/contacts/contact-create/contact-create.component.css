@@ -1,7 +1,6 @@
 .mat-button {
 	float: right;
-	border: none;
-	padding-top: 15px;
+	background-color: lightgrey;
 }
 
 mat-form-field {

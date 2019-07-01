@@ -17,7 +17,8 @@ import { ContactComponent } from '../contact/contact.component';
 export class ContactListComponent implements OnInit {
   contacts: Contact[];
   dataSource: MatTableDataSource<Contact> = new MatTableDataSource(this.contacts);
-  displayedColumns: string[] = ['name', 'rapport', 'position', 'team', 'email', 'last interaction'];
+  deleteContactEvent = false;
+  displayedColumns: string[] = ['name', 'rapport', 'position', 'team', 'email', 'last interaction', 'delete contact'];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(private contactService: ContactService, public dialog: MatDialog) { }
 
@@ -43,31 +44,35 @@ export class ContactListComponent implements OnInit {
   }
 
   deleteContact(contact: Contact) {
+    this.deleteContactEvent = true;
+    console.log(`DELETE contact: ${JSON.stringify(contact)}`);
     // remove from ui
-    this.contacts = this.contacts.filter(c => c.id !== contact.id);
+    this.contacts = this.contacts.filter(c => c.email !== contact.email);
     // remove from server
-    this.contactService.deleteContact(contact).subscribe();
-  }
-
-  addContact(contact: Contact) {
-    this.contactService.addContact(contact).subscribe(contact => {
-      this.contacts.push(contact);
-    });
+    // this.contactService.deleteContact(contact).subscribe();
+    console.log(`CONTACTS after Delete: ${JSON.stringify(this.contacts)}`);
   }
 
   editContactDialog(contact: Contact) {
+    if (this.deleteContactEvent) {
+      this.deleteContactEvent = false;
+      return;
+    }
+    console.log(`EDIT contact: ${JSON.stringify(contact)}`);
     const dialogRef = this.dialog.open(ContactComponent, {
       data: {contactToEdit: contact}
     });
 
     dialogRef.afterClosed().subscribe(newContact => {
-      this.contacts.map(c => {
-        if (c.email === newContact.email) {
-          c = newContact;
-        }
-        return c;
-      })
-    })
+      if (newContact) {
+        this.contacts.map(c => {
+          if (c.email === newContact.email) {
+            c = newContact;
+          }
+          return c;
+        });
+      }
+    });
   }
 
   createNewContactDialog() {
