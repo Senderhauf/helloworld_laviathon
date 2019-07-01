@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongo = require('mongodb')
 const MongoClient = mongo.MongoClient;
@@ -17,6 +18,8 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
+app.use(cors())
 
 app.use(bodyParser.json())
 
@@ -76,7 +79,7 @@ app.post('/api/contacts', (req, res) => {
 
 // app.delete @ route: /api/contact/:contactID
 app.delete('/api/contacts/:email', (req, res) => {
-  db.collection('contacts').deleteOne({email: req.params.email}).then(result => {
+  db.collection('contacts').deleteOne({email: req.params.email.toLowerCase()}).then(result => {
     console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
     if (result.deletedCount > 0){

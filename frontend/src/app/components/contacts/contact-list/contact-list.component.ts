@@ -49,7 +49,7 @@ export class ContactListComponent implements OnInit {
     // remove from ui
     this.contacts = this.contacts.filter(c => c.email !== contact.email);
     // remove from server
-    // this.contactService.deleteContact(contact).subscribe();
+    this.contactService.deleteContact(contact).subscribe();
     console.log(`CONTACTS after Delete: ${JSON.stringify(this.contacts)}`);
   }
 
