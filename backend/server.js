@@ -8,8 +8,6 @@ let db;
 const app = express();
 const port = 3000;
 
-
-
 // Start MongoDB instance.
 //const spawn = require('child_process').spawn;
 //const pipe = spawn('mongod')
@@ -56,7 +54,7 @@ app.get('/api/contacts/:email', (req, res) => {
   })
 })
 
-app.post('/api/contact', (req, res) => {
+app.post('/api/contacts', (req, res) => {
   const newContact = req.body;
   db.collection('contacts').updateOne({ email: newContact.email }, { $set: newContact }, { upsert: true }).then(result => {
     console.log(`DEBUG - modified count: ${result.modifiedCount}`)
