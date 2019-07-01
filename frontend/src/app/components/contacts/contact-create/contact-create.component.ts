@@ -37,6 +37,7 @@ export class ContactCreateComponent implements OnInit {
       this.contactService.addContact(contactToAdd).subscribe(contact => {
         this.contacts.push(contact);
       });
+      this.onNoClick();
     } else {
       console.log(`ERROR: invalid contact: ${JSON.stringify(contactToAdd)}`);
     }

@@ -16,6 +16,10 @@ import { ContactComponent } from '../contact/contact.component';
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[];
+  visibleContacts: Contact[];
+  countContacts: number;
+  pageIndex: 0;
+  pageSize = 10;
   dataSource: MatTableDataSource<Contact> = new MatTableDataSource(this.contacts);
   deleteContactEvent = false;
   displayedColumns: string[] = ['name', 'rapport', 'position', 'team', 'email', 'last interaction', 'delete contact'];
@@ -23,10 +27,16 @@ export class ContactListComponent implements OnInit {
   constructor(private contactService: ContactService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.getContacts();
+  }
+
+  getContacts() {
     this.contactService.getContacts().subscribe(contacts => {
       this.contacts = contacts['contacts'].map(c => {
-        const d = new Date(c.lastInteraction);
-        c.lastInteraction = `${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`;
+        if (c.lastInteraction) {
+          const d = new Date(c.lastInteraction);
+          c.lastInteraction = `${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`;
+        }
         Object.keys(c).map(x => {
           if (typeof c[x] === 'string') {
             c[x] = c[x].toUpperCase();
@@ -34,8 +44,14 @@ export class ContactListComponent implements OnInit {
         });
         return c;
       });
-      this.dataSource = new MatTableDataSource(this.contacts);
+
+      // this.contacts[this.pageIndex*this.pageSize, (this.pageIndex + 1)*this.pageSize]
+      this.visibleContacts = this.contacts.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+      console.log(`visibleContacts: ${this.visibleContacts}`);
+      console.log(`contacts: ${this.contacts}`);
+      this.dataSource = new MatTableDataSource(this.contacts.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize));
       this.dataSource.sort = this.sort;
+      this.countContacts = this.contacts.length;
     });
   }
 
@@ -45,12 +61,12 @@ export class ContactListComponent implements OnInit {
 
   deleteContact(contact: Contact) {
     this.deleteContactEvent = true;
-    console.log(`DELETE contact: ${JSON.stringify(contact)}`);
-    // remove from ui
-    this.contacts = this.contacts.filter(c => c.email !== contact.email);
+
     // remove from server
-    this.contactService.deleteContact(contact).subscribe();
-    console.log(`CONTACTS after Delete: ${JSON.stringify(this.contacts)}`);
+    this.contactService.deleteContact(contact).subscribe(() => {
+      // refresh with new contacts
+      this.ngOnInit();
+    });
   }
 
   editContactDialog(contact: Contact) {
@@ -72,19 +88,27 @@ export class ContactListComponent implements OnInit {
           return c;
         });
       }
+      this.ngOnInit();
     });
+
+    this.dataSource = new MatTableDataSource(this.contacts);
   }
 
   createNewContactDialog() {
     const dialogRef = this.dialog.open(ContactCreateComponent, {
-      // width: '80%', 
       data: {contacts: this.contacts}
     });
 
     dialogRef.afterClosed().subscribe(newContacts => {
       this.contacts = newContacts;
+      this.ngOnInit();
     });
   }
 
-  
+  pageEvent(event) {
+    console.log(`page event: ${JSON.stringify(event)}`);
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.ngOnInit();
+  }
 }
