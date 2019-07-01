@@ -2,6 +2,7 @@ import {Contact} from './Contact';
 
 export class Interaction {
   id: string;
+  uniqueStamp: string; //combination of the Event location and starting date+time
   eventType: string;
   eventQualtity: number;
   eventLocation: string;
