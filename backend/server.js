@@ -119,20 +119,20 @@ app.get('/api/interactions/:id', (req, res) => {
 
 app.post('/api/interaction', (req, res) => {
   const newInteraction = req.body;
-  log("DEBUG - ")
-  db.collection('interactions').updateOne({ _id: newInteraction.id }, { $set: newInteraction }, { upsert: true }).then(result => {
+  console.log("DEBUG - ")
+  db.collection('interactions').updateOne({ uniqueStamp: newInteraction.uniqueStamp }, { $set: newInteraction }, { upsert: true }).then(result => {
     console.log(`modified count: ${result.modifiedCount}`)
     console.log(`matched count: ${result.matchedCount}`)
 
-    if (!(result.matchedCount === 0 && result.modifiedCount === 0)) {
-      throw Error('Interaction Exists Already')
-    }
-    console.log(`result.upsertedId: ${result.upsertedId._id}`)
-    var o_id = new mongo.ObjectID(result.upsertedId._id)
-    console.log(`objectid: ${o_id}`)
-    return db.collection('interactions').find({ _id: o_id }).limit(1).next()
-  }
-  ).then(newInteraction => {
+    // if (!(result.matchedCount === 0 && result.modifiedCount === 0)) {
+    //   throw Error('Interaction Exists Already')
+    // }
+    // console.log(`result.upsertedId: ${result.upsertedId._id}`)
+    // var o_id = new mongo.ObjectID(result.upsertedId._id)
+    // console.log(`objectid: ${o_id}`)
+    // return db.collection('interactions').find({ _id: o_id }).limit(1).next()
+    return db.collection('interactions').find({uniqueStamp: newInteraction.uniqueStamp}).limit(1).next()
+  }).then(newInteraction => {
     console.log(`server newContact: ${JSON.stringify(newInteraction)}`)
     res.json(newInteraction);
   }).catch(error => {
@@ -140,6 +140,38 @@ app.post('/api/interaction', (req, res) => {
     res.status(500).json({ message: `Internal Server Error: ${error}` });
   });
 })
+
+// app.post('/api/interaction', (req, res) => {
+//   const newInteraction = req.body;
+//   console.log(`DEBUG - ${JSON.stringify(newInteraction)}`);
+// /*   if (newInteraction._id == "")
+//   {
+//     delete newInteraction._id;
+//   } */
+//   console.log(`DEBUG - ${JSON.stringify(newInteraction)}`);
+//   db.collection('interactions').updateOne({ _id: ObjectId(newInteraction._id) }, { $set: newInteraction }, { upsert: true }).then(result => {
+//     console.log("DEBUG - ")
+//     console.log(`modified count: ${result.modifiedCount}`)
+//     console.log(`matched count: ${result.matchedCount}`)
+
+//     var interaction = null;
+//     if (result.modifiedCount > 0)
+//     {
+//       interaction = db.collection('interactions').find({_id: ObjectId(newInteraction._id)}).limit(1).next();
+//     }
+//     else
+//     {
+//       interaction = db.collection('interactions').find({_id: result.upsertedId}).limit(1).next();
+//     }
+//     return interaction;
+//   }).then(newInteraction => {
+//     console.log(`server newContact: ${JSON.stringify(newInteraction)}`)
+//     res.json(newInteraction);
+//   }).catch(error => {
+//     console.log(error);
+//     res.status(500).json({ message: `Internal Server Error: ${error}` });
+//   });
+// })
 
 // app.delete @ route: /api/interaction/:interactionID
 app.delete('/api/interactions/:id', (req, res) => {

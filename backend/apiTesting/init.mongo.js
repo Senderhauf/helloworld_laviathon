@@ -23,8 +23,8 @@ MongoClient.connect(url, function(err, client) {
   db.collection("contacts").createIndex({email:1});
 
   db.collection("interactions").insertMany([
-    { eventType: "Lunch", eventQualtity: 5, eventLocation: "Davians", startTime: "2019-06-22T09:49:41.753Z", endTime: "2019-06-22T10:49:41.753Z", members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"]},
-    { eventType: "Coffee", eventQualtity: 3, eventLocation: "Davians", startTime: "2019-06-26T09:49:41.753Z", endTime: "2019-06-26T10:49:41.753Z", members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"] }
+    { eventType: "Lunch", eventQualtity: 5, eventLocation: "Davians", startTime: "2019-06-22T09:49:41.753Z", endTime: "2019-06-22T10:49:41.753Z", members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-22T09:49:41.753Z"},
+    { eventType: "Coffee", eventQualtity: 3, eventLocation: "Davians", startTime: "2019-06-26T09:49:41.753Z", endTime: "2019-06-26T10:49:41.753Z", members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"}
  ])
 
   client.close();
