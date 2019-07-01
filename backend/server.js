@@ -57,7 +57,7 @@ app.get('/api/contacts/:email', (req, res) => {
   })
 })
 
-app.post('/api/contacts', (req, res) => {
+app.post('/api/contact', (req, res) => {
   const newContact = req.body;
   db.collection('contacts').updateOne({ email: newContact.email }, { $set: newContact }, { upsert: true }).then(result => {
     console.log(`DEBUG - modified count: ${result.modifiedCount}`)
