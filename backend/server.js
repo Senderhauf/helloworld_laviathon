@@ -57,7 +57,7 @@ app.get('/api/contacts/:email', (req, res) => {
   })
 })
 
-app.post('/api/contacts', (req, res) => {
+app.post('/api/contact', (req, res) => {
   const newContact = req.body;
   Object.keys(newContact).map(x => {
     if (typeof(x) === 'string') {
@@ -143,8 +143,8 @@ app.post('/api/interaction', (req, res) => {
 })
 
 // app.delete @ route: /api/interaction/:interactionID
-app.delete('/api/interactions/:id', (req, res) => {
-  db.collection('interactions').deleteOne({_id: ObjectId(req.params.id)}).then(result => {
+app.delete('/api/interactions/:uniqueStamp', (req, res) => {
+  db.collection('interactions').deleteOne({uniqueStamp: req.params.uniqueStamp}).then(result => {
     console.log(`DEBUG - deleted count: ${result.deletedCount}`)
 
     if (result.deletedCount > 0){
