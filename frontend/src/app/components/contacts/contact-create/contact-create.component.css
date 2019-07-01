@@ -1,0 +1,9 @@
+.mat-button {
+	float: right;
+	background-color: lightgrey;
+}
+
+mat-form-field {
+	width: '70%'
+}
+

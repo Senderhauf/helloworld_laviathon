@@ -3,20 +3,17 @@ table {
 }
 
 .mat-form-field {
-	font-size: 14px;
 	width: 100%;
-}
-
-matInput {
-	color: black;
 }
 
 #fab{
     position: fixed;
-    right: 40px;
-    bottom: 40px;
+    right: 15px;
+    bottom: 60px;
 }
 
 .mat-row:hover {
 	background-color: silver;
 }
+
+

@@ -51,9 +51,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatTooltipModule, 
     MatPaginatorModule, 
-    MatDialogModule
+    MatDialogModule, 
   ],
-  entryComponents: [ContactCreateComponent],
+  entryComponents: [
+    ContactCreateComponent,
+    ContactComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

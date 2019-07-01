@@ -40,8 +40,17 @@
       <td mat-cell *matCellDef="let element" > {{element.lastInteraction}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="delete contact">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button (click)="deleteContact(element)">
+          DELETE
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getContact(row)" matTooltip="Click Row to Edit Contact"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editContactDialog(row)" matTooltip="Click Row to Edit Contact" curContact="row"></tr>
   </table>
 
   <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

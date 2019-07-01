@@ -1,22 +1,58 @@
+<div main-container>
+  <mat-dialog-content >
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Create New Contact</mat-card-title>
+        </mat-card-header>
 
-<div>
-    <div class="example-container">
-      <mat-form-field>
-        <input matInput placeholder="Name">
-      </mat-form-field>
+        <mat-card-content>
+          <div class="example-container">
+            <mat-form-field>
+              <input matInput type="text" class="form-control" placeholder="Name" id="name" [(ngModel)]="newContact.name" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput type="text" class="form-control" placeholder="Email" id="name" [(ngModel)]="newContact.email" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput type="text" class="form-control" placeholder="Position" id="position" [(ngModel)]="newContact.position">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput type="text" class="form-control" placeholder="Team" id="team" [(ngModel)]="newContact.team">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                class="form-control"
+                placeholder="Rapport"
+                id="rapport"
+                matTooltip="How well do you know them? On a scale of 1-100 (1 being least familiar)"
+                [(ngModel)]="newContact.rapport"
+              >
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <textarea
+                matInput
+                type="text"
+                class="form-control"
+                placeholder="Notes"
+                id="notes"
+                [(ngModel)]="newContact.notes"
+              >
+              </textarea>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
 
-      <mat-form-field>
-        <input matInput placeholder="Rapport">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Email">
-      </mat-form-field>
-
-      <mat-form-field>
-        <textarea matInput placeholder="Notes"></textarea>
-      </mat-form-field>
-
-
-    </div>
+      </mat-card>
+  </mat-dialog-content>
+  <mat-card-actions>
+    <button mat-button (click)="addContact(newContact)">SAVE</button>
+    <button mat-button (click)="onNoClick()">CANCEL</button>
+  </mat-card-actions>
 </div>
