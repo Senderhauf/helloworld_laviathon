@@ -46,12 +46,20 @@
                 >
                 </textarea>
               </mat-form-field>
+              <br>
               <mat-form-field>
-                Start Date Placeholder
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Choose a date"
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
+              <br>
               <mat-form-field>
-                  End Date Placeholder
-                </mat-form-field>
+                End Date Placeholder
+              </mat-form-field>
             </div>
           </mat-card-content>
 

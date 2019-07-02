@@ -47,8 +47,6 @@ export class ContactListComponent implements OnInit {
 
       // this.contacts[this.pageIndex*this.pageSize, (this.pageIndex + 1)*this.pageSize]
       this.visibleContacts = this.contacts.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
-      console.log(`visibleContacts: ${this.visibleContacts}`);
-      console.log(`contacts: ${this.contacts}`);
       this.dataSource = new MatTableDataSource(this.contacts.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize));
       this.dataSource.sort = this.sort;
       this.countContacts = this.contacts.length;

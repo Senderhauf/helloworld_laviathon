@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Interaction } from '../../../models/Interaction';
 import { FormControl, Validators } from '@angular/forms';
 import { InteractionService } from '../../../services/interaction.service';
-import * as EmailValidator from 'email-validator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-interaction-create',
@@ -12,7 +12,7 @@ import * as EmailValidator from 'email-validator';
 })
 export class InteractionCreateComponent implements OnInit {
   interactions: Interaction[];
-  newInteration = new Interaction();
+  newInteraction = new Interaction();
 
   constructor(
     public dialogRef: MatDialogRef<InteractionCreateComponent>, 

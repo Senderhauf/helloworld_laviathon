@@ -29,6 +29,7 @@ export class ContactComponent implements OnInit {
   editContact(contactToEdit: Contact) {
     this.contactService.addContact(contactToEdit).subscribe(contact => {
       this.contact = contact;
-    })
+    });
+    this.onNoClick();
   }
 }

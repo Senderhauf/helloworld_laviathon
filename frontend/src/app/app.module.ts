@@ -22,6 +22,7 @@ import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -52,10 +53,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTooltipModule, 
     MatPaginatorModule, 
     MatDialogModule, 
+    MatDatepickerModule
   ],
   entryComponents: [
     ContactCreateComponent,
-    ContactComponent
+    ContactComponent,
+    InteractionComponent,
+    InteractionCreateComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
