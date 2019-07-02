@@ -1,3 +1,72 @@
-<p>
-  interaction works!
-</p>
+
+<div main-container>
+    <mat-dialog-content>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Edit Interaction</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="example-container">
+            <mat-form-field>
+              <input
+                id="interaction_start"
+                matInput
+                [(ngModel)]="editedInteraction.startTime"
+                readonly="interaction.startTime"
+                matTooltip="Cannot edit Start Time field. Delete interaction and create a new one if necessary.">
+              <mat-hint>Start</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input
+                matInput
+                [(ngModel)]="editedInteraction.endTime"
+                readonly="interaction.endTime"
+                matTooltip="Cannot edit End Time field. Delete interaction and create a new one if necessary.">
+              <mat-hint>End</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input
+                matInput
+                [placeholder]="interaction.eventLocation"
+                [(ngModel)]="editedInteraction.eventLocation"
+                readonly="interaction.eventLocation">
+              <mat-hint>Location</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input
+                matInput
+                [placeholder]="interaction.eventType"
+                [(ngModel)]="editedInteraction.eventType">
+              <mat-hint>Type</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input
+                matInput
+                [placeholder]="interaction.eventQuality"
+                matTooltip="How well do you think it went for it's intended purpose? On a scale of 1-5 (1 being a disaster)"
+                [(ngModel)]="editedInteraction.eventQuality">
+              <mat-hint>Event Quality</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <textarea
+                matInput
+                [placeholder]="interaction.notes"
+                [(ngModel)]="editedInteraction.notes">
+              </textarea>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </mat-dialog-content>
+    <mat-card-actions>
+      <button mat-button (click)="editInteraction(editedInteraction)">SAVE</button>
+      <button mat-button (click)="onNoClick()">CANCEL</button>
+    </mat-card-actions>
+  </div>
+

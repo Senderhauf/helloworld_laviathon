@@ -1,3 +1,64 @@
-<p>
-  interaction-create works!
-</p>
+<div main-container>
+    <mat-dialog-content >
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>Create New Interaction</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput type="text" class="form-control" placeholder="Name" id="name" [(ngModel)]="newInteraction.name" required>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input matInput type="text" class="form-control" placeholder="Event Type" id="eventType" [(ngModel)]="newInteraction.eventType" required>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input matInput type="text" class="form-control" placeholder="Event Location" id="eventLocation" [(ngModel)]="newInteraction.eventLocation">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input matInput type="text" class="form-control" placeholder="Members" id="members" [(ngModel)]="newInteraction.members">
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input
+                  matInput
+                  type="text"
+                  class="form-control"
+                  placeholder="Event Quality"
+                  id="eventQuality"
+                  matTooltip="How well do you think it went for it's intended purpose? On a scale of 1-5 (1 being a disaster)"
+                  [(ngModel)]="newInteraction.eventQuality"
+                >
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <textarea
+                  matInput
+                  type="text"
+                  class="form-control"
+                  placeholder="Notes"
+                  id="notes"
+                  [(ngModel)]="newInteraction.notes"
+                >
+                </textarea>
+              </mat-form-field>
+              <mat-form-field>
+                Start Date Placeholder
+              </mat-form-field>
+              <mat-form-field>
+                  End Date Placeholder
+                </mat-form-field>
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+    </mat-dialog-content>
+    <mat-card-actions>
+      <button mat-button (click)="addInteraction(newInteraction)">SAVE</button>
+      <button mat-button (click)="onNoClick()">CANCEL</button>
+    </mat-card-actions>
+  </div>

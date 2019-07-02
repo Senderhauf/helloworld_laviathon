@@ -18,7 +18,7 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[];
   visibleContacts: Contact[];
   countContacts: number;
-  pageIndex: 0;
+  pageIndex = 0;
   pageSize = 10;
   dataSource: MatTableDataSource<Contact> = new MatTableDataSource(this.contacts);
   deleteContactEvent = false;

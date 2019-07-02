@@ -125,7 +125,7 @@ app.get('/api/interactions/:id', (req, res) => {
   })
 })
 
-app.post('/api/interaction', (req, res) => {
+app.post('/api/interactions', (req, res) => {
   const newInteraction = req.body;
   console.log("DEBUG - ")
   db.collection('interactions').updateOne({ uniqueStamp: newInteraction.uniqueStamp }, { $set: newInteraction }, { upsert: true }).then(result => {
