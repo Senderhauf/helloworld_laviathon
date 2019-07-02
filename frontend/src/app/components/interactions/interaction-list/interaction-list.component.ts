@@ -19,11 +19,11 @@ export class InteractionListComponent implements OnInit {
   visibleInteractions: Interaction[];
   countInteractions: number;
   pageIndex = 0;
-  pageSize = 0;
+  pageSize = 10;
   dataSource: MatTableDataSource<Interaction> = new MatTableDataSource(this.interactions);
   deleteInteractionEvent = false;
   displayedColumns: string[] = [
-    'name', 'eventType', 'eventQuality', 'eventLocation', 'members', 'startTime', 'endTime', 'deleteInteraction'
+    'eventType', 'eventQuality', 'eventLocation', 'members', 'startTime', 'endTime', 'deleteInteraction'
   ];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(private interactionService: InteractionService, public dialog: MatDialog) { }
@@ -43,6 +43,12 @@ export class InteractionListComponent implements OnInit {
         return i;
       });
       this.visibleInteractions = this.interactions.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+      this.visibleInteractions.map(i => {
+        const s = new Date(i.startTime);
+        const e = new Date(i.endTime);
+        i.startTime = `${s.getMonth()}/${s.getDate()}/${s.getFullYear()} - ${s.getHours()}:${s.getMinutes()}`;
+        i.endTime = `${e.getMonth()}/${e.getDate()}/${e.getFullYear()} - ${e.getHours()}:${e.getMinutes()}`;
+      })
       this.dataSource = new MatTableDataSource(this.visibleInteractions);
       this.dataSource.sort = this.sort;
       this.countInteractions = this.interactions.length;

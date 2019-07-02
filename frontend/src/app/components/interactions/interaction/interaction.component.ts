@@ -21,7 +21,6 @@ export class InteractionComponent implements OnInit {
     this.interaction = this.interactionToEdit.interactionToEdit;
     this.editedInteraction = {
       uniqueStamp: this.interaction.uniqueStamp,
-      name: this.interaction.name,
       eventType: this.interaction.eventType,
       eventQuality: this.interaction.eventQuality,
       eventLocation: this.interaction.eventLocation,

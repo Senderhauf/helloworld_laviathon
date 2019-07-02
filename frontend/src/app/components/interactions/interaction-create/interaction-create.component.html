@@ -16,7 +16,7 @@
               </mat-form-field>
               <br>
               <mat-form-field>
-                <input matInput type="text" class="form-control" placeholder="Event Location" id="eventLocation" [(ngModel)]="newInteraction.eventLocation">
+                <input matInput type="text" class="form-control" placeholder="Event Location" id="eventLocation" [(ngModel)]="newInteraction.eventLocation" required>
               </mat-form-field>
               <br>
               <mat-form-field>
@@ -32,6 +32,7 @@
                   id="eventQuality"
                   matTooltip="How well do you think it went for it's intended purpose? On a scale of 1-5 (1 being a disaster)"
                   [(ngModel)]="newInteraction.eventQuality"
+                  required
                 >
               </mat-form-field>
               <br>
@@ -50,16 +51,25 @@
               <mat-form-field>
                 <input
                   matInput
+                  class="form-control"
                   [matDatepicker]="picker"
                   placeholder="Choose a date"
+                  [(ngModel)]="newInteractionDate"
+                  required
                 >
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <br>
-              <mat-form-field>
-                End Date Placeholder
-              </mat-form-field>
+                <div class="ngx-timepicker-field">
+                  <mat-label>Start Time</mat-label>
+                  <ngx-timepicker-field [(ngModel)]="newInteractionStartTime" [format]="24" [defaultTime]="'12:00 am'" required></ngx-timepicker-field>
+                </div>
+              <br>
+               <div class="ngx-timepicker-field">
+                  <mat-label>End Time</mat-label>
+                  <ngx-timepicker-field [(ngModel)]="newInteractionEndTime" [format]="24" [defaultTime]="'12:00 am'" required></ngx-timepicker-field>
+                </div>
             </div>
           </mat-card-content>
 
