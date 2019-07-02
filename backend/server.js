@@ -57,7 +57,7 @@ app.get('/api/contacts/:email', (req, res) => {
   })
 })
 
-app.post('/api/contact', (req, res) => {
+app.post('/api/contacts', (req, res) => {
   const newContact = req.body;
   Object.keys(newContact).map(x => {
     if (typeof(x) === 'string') {
