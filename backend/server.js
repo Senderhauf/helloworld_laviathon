@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb')
 const MongoClient = mongo.MongoClient;
 const ObjectId = mongo.ObjectId;
+const { Utilities } = require('./Utilities.js');
+const Utility = new Utilities();
 
 let db;
 const app = express();
@@ -131,6 +133,8 @@ app.post('/api/interactions', (req, res) => {
   db.collection('interactions').updateOne({ uniqueStamp: newInteraction.uniqueStamp }, { $set: newInteraction }, { upsert: true }).then(result => {
     console.log(`modified count: ${result.modifiedCount}`)
     console.log(`matched count: ${result.matchedCount}`)
+
+    Utility.UpdateContacts(newInteraction.members)
 
     return db.collection('interactions').find({uniqueStamp: newInteraction.uniqueStamp}).limit(1).next()
   }).then(newInteraction => {
