@@ -22,8 +22,7 @@ import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -51,12 +50,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatSortModule,
     MatTableModule,
     MatIconModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    NgxMaterialTimepickerModule
+    MatTooltipModule, 
+    MatPaginatorModule, 
+    MatDialogModule, 
+    MatDatepickerModule
   ],
   entryComponents: [
     ContactCreateComponent,

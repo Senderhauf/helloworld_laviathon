@@ -1,3 +1,4 @@
+<<<<<<< HEAD:backend/utilties.js
 // import {password} from './config.js'
 let password = require('./config')
 let contact = {email: "hart.sinterhauf@fisglobal.com"};
@@ -9,6 +10,51 @@ class Utilities {
   UpdateContacts(contacts) {
     console.log('Update Contacts Hit')
   }
+=======
+class Utilities{
+    /**
+     * Updates the rapport value of all contacts so that reminders can be sent.
+     * @param db: Pointer to the database.
+     * @param contacts: Array of emails of contacts whose rapports needs to be updated.
+     * @returns: nothing
+     */
+    UpdateContacts(contacts, db){
+       contacts.forEach((email) => {
+           // Gets a list of interactions the contact is a part of.
+           db.collection('interactions').find({ members: email }).sort({endTime: -1}).toArray().then( interactions => {//.sort({endTime: -1})
+
+               // Sum the interaction qualities together.
+                var newRapport = 0;
+                interactions.forEach((interaction) => {
+                    // The Time value is the number of 10 min. increments the meeting was held for.
+                    var timeValue = (new Date(interaction.endTime) - new Date (interaction.startTime)) / (1000 * 60 * 12)
+                    // The time value is then multiplied by the given quality after getting the natural log of it.
+                    newRapport += interaction.eventQualtity * Math.log(timeValue); // TODO: figure out how to get the time in here.
+                })
+                // Get the average rapport
+                newRapport = newRapport / interactions.length
+
+                // Get the most recent interaction.
+                var recentInteractionDate = new Date(interactions[0].endTime)
+                var timePenalty = (new Date() - new Date (recentInteractionDate))/ (1000 * 60 * 60 * 24)
+                //Decrement the Rapport based on how long it has been since an interaction.
+                var newRapport = Math.floor(newRapport - timePenalty);
+
+                // Get the contact, so we can update the rapport.
+                var contact = db.collection('contacts').find({ email: email }).limit(1).next().then( contact => {
+                    // Update the Rapport.
+                    contact.rapport = newRapport
+
+                    db.collection('contacts').updateOne({email: email}, { $set: contact })
+                    .catch(error => {
+                      // Log the error.
+                      console.log(error)
+                    })
+                })
+           })
+       })
+    }
+>>>>>>> 8f138a995e02cd29e9a9825e6ee5c4a95e73e57a:backend/Utilities.js
 
   //Once Emails are triggered to be sent use:  Utilities.SendEmail(email);
 
