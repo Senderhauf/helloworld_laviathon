@@ -1,16 +1,3 @@
-<<<<<<< HEAD:backend/utilties.js
-// import {password} from './config.js'
-let password = require('./config')
-let contact = {email: "hart.sinterhauf@fisglobal.com"};
-
-let nodemailer = require("nodemailer");
-
-class Utilities {
-
-  UpdateContacts(contacts) {
-    console.log('Update Contacts Hit')
-  }
-=======
 class Utilities{
     /**
      * Updates the rapport value of all contacts so that reminders can be sent.
@@ -54,7 +41,6 @@ class Utilities{
            })
        })
     }
->>>>>>> 8f138a995e02cd29e9a9825e6ee5c4a95e73e57a:backend/Utilities.js
 
   //Once Emails are triggered to be sent use:  Utilities.SendEmail(email);
 

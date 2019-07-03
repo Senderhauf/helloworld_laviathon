@@ -7,7 +7,6 @@ const url = 'mongodb://localhost:27017/';
 //let db;
 //console.log(`DEBUG: db: ${db}`)
 
-<<<<<<< HEAD
 let randDate, endTime;
 
 function randomDate(start, end) {
@@ -19,8 +18,6 @@ function setRandDate() {
   return randDate;
 }
 
-=======
->>>>>>> 8f138a995e02cd29e9a9825e6ee5c4a95e73e57a
 MongoClient.connect(url, function(err, client) {
   assert.equal(null, err);
   const db = client.db("FIS_Connected");
@@ -45,7 +42,6 @@ MongoClient.connect(url, function(err, client) {
   ])
   db.collection("contacts").createIndex({email:1});
 
-<<<<<<< HEAD
   let interactions = [
     { eventType: "Lunch", eventQuality: 5, eventLocation: "DAVIANS", startTime: setRandDate(), members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"]},
     { eventType: "Coffee", eventQuality: 3, eventLocation: "STARBUCKS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
@@ -77,12 +73,6 @@ MongoClient.connect(url, function(err, client) {
   })
 
   db.collection("interactions").insertMany(interactions)
-=======
-  db.collection("interactions").insertMany([
-    { eventType: "Lunch", eventQualtity: 5, eventLocation: "Davians", startTime: "2019-06-22T09:49:41.753Z", endTime: "2019-06-22T10:49:41.753Z", members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-22T09:49:41.753Z"},
-    { eventType: "Coffee", eventQualtity: 3, eventLocation: "Davians", startTime: "2019-06-26T09:49:41.753Z", endTime: "2019-06-26T10:49:41.753Z", members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"}
- ])
->>>>>>> 8f138a995e02cd29e9a9825e6ee5c4a95e73e57a
 
   client.close();
 });

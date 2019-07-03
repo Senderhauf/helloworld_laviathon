@@ -19,7 +19,7 @@ export class InteractionListComponent implements OnInit {
   visibleInteractions: Interaction[];
   countInteractions: number;
   pageIndex = 0;
-  pageSize = 0;
+  pageSize = 10;
   dataSource: MatTableDataSource<Interaction> = new MatTableDataSource(this.interactions);
   deleteInteractionEvent = false;
   displayedColumns: string[] = [
@@ -34,6 +34,7 @@ export class InteractionListComponent implements OnInit {
 
   getInteractions() {
     this.interactionService.getInteractions().subscribe(interactions => {
+      // console.log(`getInteractions(): ${JSON.stringify(interactions)}`);
       this.interactions = interactions['interactions'].map(i => {
         Object.keys(i).map(x => {
           if (typeof i[x] === 'string') {
