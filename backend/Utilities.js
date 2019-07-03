@@ -1,5 +1,10 @@
 class Utilities{
-    // @param: contacts: an array of emails of contacts whose rapports needs to be updated.
+    /**
+     * Updates the rapport value of all contacts so that reminders can be sent.
+     * @param db: Pointer to the database.
+     * @param contacts: Array of emails of contacts whose rapports needs to be updated.
+     * @returns: nothing
+     */
     UpdateContacts(contacts, db){
        contacts.forEach((email) => {
            // Gets a list of interactions the contact is a part of.
@@ -29,8 +34,8 @@ class Utilities{
 
                     db.collection('contacts').updateOne({email: email}, { $set: contact })
                     .catch(error => {
+                      // Log the error.
                       console.log(error)
-                      res.status(500).json({ message: `Internal Server Error: ${error}`});
                     })
                 })
            })
