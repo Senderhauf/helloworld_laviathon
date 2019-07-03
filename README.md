@@ -1,6 +1,16 @@
 # FIS Connects
 
-One Paragraph of project description goes here
+FIS Connects helps busy professionals track and manage their various business contacts and professional relationships.
+By providing a singular location to track meetings and other interactions they have with their contacts, they build rapport
+with them that is tracked by FIS Connects.  They are then reminded via email when they have forgotten a contact.
+
+We hope that this will help ease the chaos of keeping in touch with a wide array of business contacts.
+
+# Team Leviathan Contributions
+Schubring, Matthew: Back end   -  
+Sinterhauf, Hart:   Front end  -  
+Vanevenhoven, Sam:  Back end   -  Rapport Tracking and Contact Creation
+Hortman, James:     Front end  -  
 
 ## Getting Started
 
