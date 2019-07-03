@@ -1,8 +1,41 @@
-class Utilities {
+class Utilities{
+    // @param: contacts: an array of emails of contacts whose rapports needs to be updated.
+    UpdateContacts(contacts, db){
+       contacts.forEach((email) => {
+           // Gets a list of interactions the contact is a part of.
+           db.collection('interactions').find({ members: email }).sort({endTime: -1}).toArray().then( interactions => {//.sort({endTime: -1})
 
-  UpdateContacts(contacts) {
-    console.log('Update Contacts Hit')
-  }
+               // Sum the interaction qualities together.
+                var newRapport = 0;
+                interactions.forEach((interaction) => {
+                    // The Time value is the number of 10 min. increments the meeting was held for.
+                    var timeValue = (new Date(interaction.endTime) - new Date (interaction.startTime)) / (1000 * 60 * 12)
+                    // The time value is then multiplied by the given quality after getting the natural log of it.
+                    newRapport += interaction.eventQualtity * Math.log(timeValue); // TODO: figure out how to get the time in here.
+                })
+                // Get the average rapport
+                newRapport = newRapport / interactions.length
+
+                // Get the most recent interaction.
+                var recentInteractionDate = new Date(interactions[0].endTime)
+                var timePenalty = (new Date() - new Date (recentInteractionDate))/ (1000 * 60 * 60 * 24)
+                //Decrement the Rapport based on how long it has been since an interaction.
+                var newRapport = Math.floor(newRapport - timePenalty);
+
+                // Get the contact, so we can update the rapport.
+                var contact = db.collection('contacts').find({ email: email }).limit(1).next().then( contact => {
+                    // Update the Rapport.
+                    contact.rapport = newRapport
+
+                    db.collection('contacts').updateOne({email: email}, { $set: contact })
+                    .catch(error => {
+                      console.log(error)
+                      res.status(500).json({ message: `Internal Server Error: ${error}`});
+                    })
+                })
+           })
+       })
+    }
 
 
 

@@ -134,7 +134,7 @@ app.post('/api/interactions', (req, res) => {
     console.log(`modified count: ${result.modifiedCount}`)
     console.log(`matched count: ${result.matchedCount}`)
 
-    Utility.UpdateContacts(newInteraction.members)
+    Utility.UpdateContacts(newInteraction.members, db)
 
     return db.collection('interactions').find({uniqueStamp: newInteraction.uniqueStamp}).limit(1).next()
   }).then(newInteraction => {
