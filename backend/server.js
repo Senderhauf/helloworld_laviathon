@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb')
 const MongoClient = mongo.MongoClient;
 const ObjectId = mongo.ObjectId;
-// const { Utilities } = require('./utilities.js');
-// const Utility = new Utilities();
+const { Utilities } = require('./utilities.js');
+const Utility = new Utilities();
 
 let db;
 const app = express();
