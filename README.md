@@ -1,5 +1,11 @@
 # FIS Connects
 
+### Problem Statement
+
+It is difficult to manage my professional relationships.  I would like a tool that would help guide my efforts to professionally network with others.  Something that is easier to use than an Excel spreadsheet.  Something that offered additional features would be nice.
+
+### Solution
+
 FIS Connects helps busy professionals track and manage their various business contacts and professional relationships.
 By providing a singular location to track meetings and other interactions they have with their contacts, they build rapport
 with them that is tracked by FIS Connects.  They are then reminded via email when they have forgotten a contact.
