@@ -7,7 +7,7 @@ with them that is tracked by FIS Connects.  They are then reminded via email whe
 We hope that this will help ease the chaos of keeping in touch with a wide array of business contacts.
 
 # Team Leviathan Contributions
-Schubring, Matthew: Back end   -  
+Schubring, Matthew: Back end   -  API services for Contacts and Interactions, testing and initialiaztion data script, stretch goal -email notifications
 Sinterhauf, Hart:   Front end  -  
 Vanevenhoven, Sam:  Back end   -  Rapport Tracking and Contact Creation
 Hortman, James:     Front end  -  
