@@ -11,6 +11,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 export class InteractionComponent implements OnInit {
   interaction: Interaction;
   editedInteraction: Interaction;
+  
   constructor(
     public dialogRef: MatDialogRef<InteractionComponent>,
     @Inject(MAT_DIALOG_DATA) public interactionToEdit,
@@ -21,12 +22,11 @@ export class InteractionComponent implements OnInit {
     this.interaction = this.interactionToEdit.interactionToEdit;
     this.editedInteraction = {
       uniqueStamp: this.interaction.uniqueStamp,
-      name: this.interaction.name,
       eventType: this.interaction.eventType,
       eventQuality: this.interaction.eventQuality,
       eventLocation: this.interaction.eventLocation,
-      startTime: this.interaction.startTime,
-      endTime: this.interaction.endTime,
+      startTime: new Date(this.interaction.startTime),
+      endTime:  new Date(this.interaction.endTime),
       notes: this.interaction.notes,
       members: this.interaction.members
     };

@@ -23,7 +23,7 @@ export class InteractionListComponent implements OnInit {
   dataSource: MatTableDataSource<Interaction> = new MatTableDataSource(this.interactions);
   deleteInteractionEvent = false;
   displayedColumns: string[] = [
-    'name', 'eventType', 'eventQuality', 'eventLocation', 'members', 'startTime', 'endTime', 'deleteInteraction'
+    'eventType', 'eventQuality', 'eventLocation', 'members', 'startTime', 'endTime', 'deleteInteraction'
   ];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(private interactionService: InteractionService, public dialog: MatDialog) { }
@@ -57,7 +57,6 @@ export class InteractionListComponent implements OnInit {
   deleteInteraction(interaction: Interaction) {
     this.deleteInteractionEvent = true;
 
-    console.log(`Delete Interaction: \n${JSON.stringify(interaction)}`);
     // remove from server
     this.interactionService.deleteInteraction(interaction).subscribe(() => {
       // refresh with new interaction
@@ -102,7 +101,6 @@ export class InteractionListComponent implements OnInit {
   }
 
   pageEvent(event) {
-    console.log(`page event: ${JSON.stringify(event)}`);
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
     this.ngOnInit();

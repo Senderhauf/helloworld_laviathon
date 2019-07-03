@@ -29,7 +29,7 @@
             <mat-form-field>
               <input
                 matInput
-                [placeholder]="interaction.eventLocation"
+                matTooltip="Cannot edit Location field. Delete interaction and create new one if necessary."
                 [(ngModel)]="editedInteraction.eventLocation"
                 readonly="interaction.eventLocation">
               <mat-hint>Location</mat-hint>
@@ -38,7 +38,6 @@
             <mat-form-field>
               <input
                 matInput
-                [placeholder]="interaction.eventType"
                 [(ngModel)]="editedInteraction.eventType">
               <mat-hint>Type</mat-hint>
             </mat-form-field>
@@ -46,11 +45,22 @@
             <mat-form-field>
               <input
                 matInput
-                [placeholder]="interaction.eventQuality"
                 matTooltip="How well do you think it went for it's intended purpose? On a scale of 1-5 (1 being a disaster)"
                 [(ngModel)]="editedInteraction.eventQuality">
               <mat-hint>Event Quality</mat-hint>
             </mat-form-field>
+            <br>
+
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Members</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-chip-list>
+                  <mat-chip *ngFor="let interactionMember of interaction.members">{{interactionMember}}</mat-chip>
+                </mat-chip-list>
+              </mat-card-content>
+            </mat-card>
             <br>
             <mat-form-field>
               <textarea
@@ -58,6 +68,7 @@
                 [placeholder]="interaction.notes"
                 [(ngModel)]="editedInteraction.notes">
               </textarea>
+              <mat-hint>Notes</mat-hint>
             </mat-form-field>
           </div>
         </mat-card-content>
