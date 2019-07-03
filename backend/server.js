@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb')
 const MongoClient = mongo.MongoClient;
 const ObjectId = mongo.ObjectId;
-const { Utilities } = require('./Utilities.js');
-const Utility = new Utilities();
+// const { Utilities } = require('./utilities.js');
+// const Utility = new Utilities();
 
 let db;
 const app = express();
@@ -134,7 +134,7 @@ app.post('/api/interactions', (req, res) => {
     console.log(`modified count: ${result.modifiedCount}`)
     console.log(`matched count: ${result.matchedCount}`)
 
-    Utility.UpdateContacts(newInteraction.members)
+    // Utility.UpdateContacts(newInteraction.members)
 
     return db.collection('interactions').find({uniqueStamp: newInteraction.uniqueStamp}).limit(1).next()
   }).then(newInteraction => {
@@ -149,8 +149,8 @@ app.post('/api/interactions', (req, res) => {
 // app.delete @ route: /api/interaction/:interactionID
 app.delete('/api/interactions/:uniqueStamp', (req, res) => {
   db.collection('interactions').deleteOne({uniqueStamp: req.params.uniqueStamp}).then(result => {
-    console.log(`DEBUG - deleted count: ${result.deletedCount}`)
-
+    console.log(`\nDEBUG - deleted count: ${result.deletedCount}`)
+    console.log(`DEBUG interacton.uniqueStamp: ${req.params.uniqueStamp}`)
     if (result.deletedCount > 0){
       console.log(`DEBUG - server deleted: ${JSON.stringify(result.deletedCount)}`)
       res.status(200).json({message: `Deleted ${result.deletedCount} interactions.`})

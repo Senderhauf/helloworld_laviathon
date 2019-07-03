@@ -54,6 +54,8 @@ export class InteractionCreateComponent implements OnInit {
     console.log(`interactionToAdd: ${JSON.stringify(interactionToAdd)}`);
 
     if (this.validateInteraction(interactionToAdd)) {
+      // remove white space in unique time stamp with regex passed to replace()
+      interactionToAdd.uniqueStamp = `${interactionToAdd.eventLocation}-${interactionToAdd.startTime}`.replace(/ /g, ''); 
       this.interactionService.addInteraction(interactionToAdd).subscribe(interaction => {
         this.interactions.push(interaction);
       });

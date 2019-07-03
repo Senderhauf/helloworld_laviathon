@@ -62,6 +62,7 @@ export class InteractionListComponent implements OnInit {
   deleteInteraction(interaction: Interaction) {
     this.deleteInteractionEvent = true;
 
+    console.log(`Delete Interaction: \n${JSON.stringify(interaction)}`);
     // remove from server
     this.interactionService.deleteInteraction(interaction).subscribe(() => {
       // refresh with new interaction

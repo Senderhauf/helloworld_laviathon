@@ -7,20 +7,15 @@ const url = 'mongodb://localhost:27017/';
 //let db;
 //console.log(`DEBUG: db: ${db}`)
 
-let randDate;
+let randDate, endTime;
 
 function randomDate(start, end) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
 function setRandDate() {
-  randDate = randomDate(new Date(2012, 0, 1), new Date());
+  randDate = randomDate(new Date(2015, 0, 1), new Date());
   return randDate;
-}
-
-function getEndTime(){
-  randDate.setHours(randDate.getHours() + 1);
-  return randDate.toDateString();
 }
 
 MongoClient.connect(url, function(err, client) {
@@ -47,23 +42,37 @@ MongoClient.connect(url, function(err, client) {
   ])
   db.collection("contacts").createIndex({email:1});
 
-  db.collection("interactions").insertMany([
-    { eventType: "Lunch", eventQuality: 5, eventLocation: "Davians", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-22T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 3, eventLocation: "Starbucks", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Meeting", eventQuality: 4, eventLocation: "Training Room Parkland", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 2, eventLocation: "Davians", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 5, eventLocation: "Parkland 2nd Floor Booths", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 3, eventLocation: "Dunkin Donuts", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Meeting", eventQuality: 1, eventLocation: "Parkland C3014", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 5, eventLocation: "Davians", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Lunch", eventQuality: 3, eventLocation: "Subway", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 4, eventLocation: "Fiddleheads", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Meeting", eventQuality: 3, eventLocation: "Parkland C2013", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 4, eventLocation: "Davians", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Drinks", eventQuality: 3, eventLocation: "Cafe Hollander", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Meeting", eventQuality: 2, eventLocation: "Parkalnd C2024", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"},
-    { eventType: "Coffee", eventQuality: 1, eventLocation: "Davians", startTime: setRandDate().toDateString(), endTime: getEndTime(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"], uniqueStamp: "Davians_2019-06-26T09:49:41.753Z"}
- ])
+  let interactions = [
+    { eventType: "Lunch", eventQuality: 5, eventLocation: "DAVIANS", startTime: setRandDate(), members : ["kaity.smith@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 3, eventLocation: "STARBUCKS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Meeting", eventQuality: 4, eventLocation: "TRAINING ROOM PARKLAND", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 2, eventLocation: "DAVIANS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 5, eventLocation: "PARKLAND 2ND FLOOR BOOTHS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 3, eventLocation: "DUNKIN DONUTS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Meeting", eventQuality: 1, eventLocation: "PARKLAND C3014", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 5, eventLocation: "DAVIANS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Lunch", eventQuality: 3, eventLocation: "SUBWAY", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 4, eventLocation: "FIDDLEHEADS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Meeting", eventQuality: 3, eventLocation: "PARKLAND C2013", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 4, eventLocation: "DAVIANS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Drinks", eventQuality: 3, eventLocation: "CAFE HOLLANDER", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Meeting", eventQuality: 2, eventLocation: "PARKLAND C2024", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]},
+    { eventType: "Coffee", eventQuality: 1, eventLocation: "DAVIANS", startTime: setRandDate(), members : ["morgan.hamm@fisglobal.com", "eddy.murphy@fisglobal.com"]}
+  ];
+
+  interactions.map(i => {
+    i.uniqueStamp = `${i.eventLocation}-${i.startTime}`.replace(/ /g, '');
+    i.endTime = new Date(i.startTime);
+    i.endTime.setHours(i.startTime.getHours() + Math.floor(Math.random() * (2 - 0)))
+    i.endTime.setMinutes(Math.floor(Math.random() * (59 - 1)))
+    Object.keys(i).map(k => {
+      if (typeof i[k] === "string") {
+        i[k] = i[k].toUpperCase();
+      }
+    })
+  })
+
+  db.collection("interactions").insertMany(interactions)
 
   client.close();
 });

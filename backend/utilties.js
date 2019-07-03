@@ -1,17 +1,14 @@
-import {password} from './config.js'
+// import {password} from './config.js'
+let password = require('./config')
 let contact = {email: "hart.sinterhauf@fisglobal.com"};
 
 let nodemailer = require("nodemailer");
 
 class Utilities {
 
-
-
   UpdateContacts(contacts) {
     console.log('Update Contacts Hit')
   }
-
-
 
   //Once Emails are triggered to be sent use:  Utilities.SendEmail(email);
 
@@ -31,11 +28,11 @@ class Utilities {
         secure: false, // true for 465, false for other ports
         ///port: 465,
         //secure: true,
-        //proxy: 'http://proxy.fnfis:8080',
+        proxy: 'http://proxy.fnfis:8080',
         auth: {
           //user: testAccount.user, // generated ethereal user
           //pass: testAccount.pass // generated ethereal password
-          user: "matthew.schubring@fisglobal.com",
+          user: "hart.sinterhauf@fisglobal.com",
           pass: password
         }
       });
@@ -43,7 +40,7 @@ class Utilities {
       // setup e-mail data with unicode symbols
       var mailOptions = {
         from: '"FIS_Connected 👻" <connected@fisglobal.com>', // sender address
-        to: `${contact}, baz@example.com`, // list of receivers
+        to: `${contact}`, // list of receivers
         subject: "FIS_Connected ✔", // Subject line
         text: "Connect with your contact Tom Petty!", // plain text body
         html: "<b>Connect with your contact Tom Petty!</b>" // html body
@@ -71,5 +68,5 @@ module.exports = {
 }
 
 
-let dummy = new Utilities()
-dummy.SendEmail(contact)
+// let dummy = new Utilities()
+// dummy.SendEmail(contact)

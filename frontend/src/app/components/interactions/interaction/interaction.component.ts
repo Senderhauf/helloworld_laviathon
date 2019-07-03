@@ -38,6 +38,7 @@ export class InteractionComponent implements OnInit {
   editInteraction(interactionToEdit: Interaction) {
     this.interactionService.addInteraction(interactionToEdit).subscribe(interaction => {
       this.interaction = interaction;
-    })
+    });
+    this.onNoClick();
   }
 }
